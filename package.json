@@ -1,5 +1,5 @@
 {
-  "name": "pix-brcode",
+  "name": "@lorenzo-rafasky/pix-brcode",
   "version": "0.1.0",
   "description": "Generate and parse Pix BR Codes (\"Pix copia e cola\"), validate Pix keys and render QR codes. Zero dependencies, fully typed.",
   "keywords": [
@@ -50,6 +50,9 @@
     "CHANGELOG.md"
   ],
   "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=20.19"
   },

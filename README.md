@@ -1,8 +1,8 @@
 # pix-brcode
 
-[![npm](https://img.shields.io/npm/v/pix-brcode.svg)](https://www.npmjs.com/package/pix-brcode)
+[![npm](https://img.shields.io/npm/v/@lorenzo-rafasky/pix-brcode.svg)](https://www.npmjs.com/package/@lorenzo-rafasky/pix-brcode)
 [![CI](https://github.com/lorenzorafasky-cloud/pix-brcode/actions/workflows/ci.yml/badge.svg)](https://github.com/lorenzorafasky-cloud/pix-brcode/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/pix-brcode.svg)](LICENSE)
+[![license](https://img.shields.io/npm/l/@lorenzo-rafasky/pix-brcode.svg)](LICENSE)
 ![zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)
 
 **🇧🇷 Português** · [🇺🇸 English](README.en.md)
@@ -10,7 +10,7 @@
 Gere e leia **BR Codes do Pix** ("Pix copia e cola"), valide **chaves Pix** e desenhe o **QR Code** — em TypeScript, sem nenhuma dependência.
 
 ```ts
-import { createStaticPix, toQRCodeSVG } from 'pix-brcode'
+import { createStaticPix, toQRCodeSVG } from '@lorenzo-rafasky/pix-brcode'
 
 const copiaECola = createStaticPix({
   key: 'fulano@example.com',
@@ -35,17 +35,17 @@ const svg = toQRCodeSVG(copiaECola, { width: 256 })
 ## Instalação
 
 ```bash
-npm install pix-brcode
+npm install @lorenzo-rafasky/pix-brcode
 ```
 
-Requer Node.js 20.19+ (pacote ESM; `require('pix-brcode')` também funciona nessas versões).
+Requer Node.js 20.19+ (pacote ESM; `require('@lorenzo-rafasky/pix-brcode')` também funciona nessas versões).
 
 ## Uso
 
 ### QR Code estático (com chave Pix)
 
 ```ts
-import { createStaticPix } from 'pix-brcode'
+import { createStaticPix } from '@lorenzo-rafasky/pix-brcode'
 
 const code = createStaticPix({
   key: '529.982.247-25',        // CPF, CNPJ, e-mail, celular ou chave aleatória
@@ -78,7 +78,7 @@ const code = createStaticPix({
 Crie a cobrança (`cob`/`cobv`) na API Pix do seu PSP e use a `location` retornada:
 
 ```ts
-import { createDynamicPix } from 'pix-brcode'
+import { createDynamicPix } from '@lorenzo-rafasky/pix-brcode'
 
 const code = createDynamicPix({
   url: 'https://pix.example.com/qr/v2/9d36b84fc70b478fb95c12729b90ca25', // com ou sem https://
@@ -92,7 +92,7 @@ Valor e txid vêm do payload da URL, por isso não fazem parte do BR Code dinâm
 ### Pix Automático (QR Code composto)
 
 ```ts
-import { createDynamicPix, createRecurrencePix, createStaticPix } from 'pix-brcode'
+import { createDynamicPix, createRecurrencePix, createStaticPix } from '@lorenzo-rafasky/pix-brcode'
 
 const rec = 'pix.example.com/rec/2353c790eefb11eaadc10242ac120002'
 
@@ -104,7 +104,7 @@ createDynamicPix({ url: '...', recurrenceUrl: rec, merchantName: '...', merchant
 ### Ler um "Pix copia e cola"
 
 ```ts
-import { parsePix, safeParsePix } from 'pix-brcode'
+import { parsePix, safeParsePix } from '@lorenzo-rafasky/pix-brcode'
 
 const pix = parsePix(code) // lança PixError se inválido (formato, CRC, campos obrigatórios)
 
@@ -129,7 +129,7 @@ const result = safeParsePix(input) // { success: true, data } | { success: false
 ### Validar chaves Pix
 
 ```ts
-import { validatePixKey, isValidCPF, isValidCNPJ, formatPixKey } from 'pix-brcode'
+import { validatePixKey, isValidCPF, isValidCNPJ, formatPixKey } from '@lorenzo-rafasky/pix-brcode'
 
 validatePixKey('529.982.247-25')            // { valid: true, type: 'cpf', key: '52998224725' }
 validatePixKey('12.ABC.345/01DE-35')        // { valid: true, type: 'cnpj', key: '12ABC34501DE35' }
@@ -146,7 +146,7 @@ formatPixKey('+5561912345678')              // '+55 (61) 91234-5678'
 ### QR Code
 
 ```ts
-import { toQRCodeSVG, toQRCodeDataURL, encodeQRCode } from 'pix-brcode'
+import { toQRCodeSVG, toQRCodeDataURL, encodeQRCode } from '@lorenzo-rafasky/pix-brcode'
 
 // SVG (string)
 const svg = toQRCodeSVG(code, { width: 256, margin: 4, darkColor: '#000', lightColor: '#fff' })
@@ -177,10 +177,10 @@ qr.modules.forEach((row, y) => row.forEach((dark, x) => {
 ### Linha de comando
 
 ```bash
-npx pix-brcode create static --key fulano@example.com --name "Fulano de Tal" --city Brasilia --amount 10.50 --qr
-npx pix-brcode parse "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D"
-npx pix-brcode qr "<copia e cola>" --svg > pix.svg
-npx pix-brcode key "(61) 91234-5678"
+npx @lorenzo-rafasky/pix-brcode create static --key fulano@example.com --name "Fulano de Tal" --city Brasilia --amount 10.50 --qr
+npx @lorenzo-rafasky/pix-brcode parse "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D"
+npx @lorenzo-rafasky/pix-brcode qr "<copia e cola>" --svg > pix.svg
+npx @lorenzo-rafasky/pix-brcode key "(61) 91234-5678"
 ```
 
 ## Erros

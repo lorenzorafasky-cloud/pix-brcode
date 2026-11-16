@@ -1,8 +1,8 @@
 # pix-brcode
 
-[![npm](https://img.shields.io/npm/v/pix-brcode.svg)](https://www.npmjs.com/package/pix-brcode)
+[![npm](https://img.shields.io/npm/v/@lorenzo-rafasky/pix-brcode.svg)](https://www.npmjs.com/package/@lorenzo-rafasky/pix-brcode)
 [![CI](https://github.com/lorenzorafasky-cloud/pix-brcode/actions/workflows/ci.yml/badge.svg)](https://github.com/lorenzorafasky-cloud/pix-brcode/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/pix-brcode.svg)](LICENSE)
+[![license](https://img.shields.io/npm/l/@lorenzo-rafasky/pix-brcode.svg)](LICENSE)
 ![zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)
 
 [🇧🇷 Português](README.md) · **🇺🇸 English**
@@ -10,7 +10,7 @@
 Generate and parse **Pix BR Codes** ("Pix copia e cola", the payload behind Brazil's instant payment QR codes), validate **Pix keys** and render the **QR code** — in TypeScript, with zero dependencies.
 
 ```ts
-import { createStaticPix, toQRCodeSVG } from 'pix-brcode'
+import { createStaticPix, toQRCodeSVG } from '@lorenzo-rafasky/pix-brcode'
 
 const code = createStaticPix({
   key: 'fulano@example.com',
@@ -35,17 +35,17 @@ const svg = toQRCodeSVG(code, { width: 256 })
 ## Install
 
 ```bash
-npm install pix-brcode
+npm install @lorenzo-rafasky/pix-brcode
 ```
 
-Requires Node.js 20.19+ (ESM package; `require('pix-brcode')` also works on those versions).
+Requires Node.js 20.19+ (ESM package; `require('@lorenzo-rafasky/pix-brcode')` also works on those versions).
 
 ## Usage
 
 ### Static QR code (Pix key)
 
 ```ts
-import { createStaticPix } from 'pix-brcode'
+import { createStaticPix } from '@lorenzo-rafasky/pix-brcode'
 
 const code = createStaticPix({
   key: '529.982.247-25',        // CPF, CNPJ, e-mail, phone or random key
@@ -78,7 +78,7 @@ const code = createStaticPix({
 Create the charge (`cob`/`cobv`) through your PSP's API Pix and use the returned `location`:
 
 ```ts
-import { createDynamicPix } from 'pix-brcode'
+import { createDynamicPix } from '@lorenzo-rafasky/pix-brcode'
 
 const code = createDynamicPix({
   url: 'https://pix.example.com/qr/v2/9d36b84fc70b478fb95c12729b90ca25', // with or without https://
@@ -92,7 +92,7 @@ Amount and txid come from the location payload, so they are not part of a dynami
 ### Pix Automático (composite QR code)
 
 ```ts
-import { createDynamicPix, createRecurrencePix, createStaticPix } from 'pix-brcode'
+import { createDynamicPix, createRecurrencePix, createStaticPix } from '@lorenzo-rafasky/pix-brcode'
 
 const rec = 'pix.example.com/rec/2353c790eefb11eaadc10242ac120002'
 
@@ -104,7 +104,7 @@ createDynamicPix({ url: '...', recurrenceUrl: rec, merchantName: '...', merchant
 ### Parse a "Pix copia e cola"
 
 ```ts
-import { parsePix, safeParsePix } from 'pix-brcode'
+import { parsePix, safeParsePix } from '@lorenzo-rafasky/pix-brcode'
 
 const pix = parsePix(code) // throws PixError when invalid (format, CRC, mandatory fields)
 
@@ -129,7 +129,7 @@ const result = safeParsePix(input) // { success: true, data } | { success: false
 ### Validate Pix keys
 
 ```ts
-import { validatePixKey, isValidCPF, isValidCNPJ, formatPixKey } from 'pix-brcode'
+import { validatePixKey, isValidCPF, isValidCNPJ, formatPixKey } from '@lorenzo-rafasky/pix-brcode'
 
 validatePixKey('529.982.247-25')            // { valid: true, type: 'cpf', key: '52998224725' }
 validatePixKey('12.ABC.345/01DE-35')        // { valid: true, type: 'cnpj', key: '12ABC34501DE35' }
@@ -146,7 +146,7 @@ formatPixKey('+5561912345678')              // '+55 (61) 91234-5678'
 ### QR code
 
 ```ts
-import { toQRCodeSVG, toQRCodeDataURL, encodeQRCode } from 'pix-brcode'
+import { toQRCodeSVG, toQRCodeDataURL, encodeQRCode } from '@lorenzo-rafasky/pix-brcode'
 
 const svg = toQRCodeSVG(code, { width: 256, margin: 4, darkColor: '#000', lightColor: '#fff' })
 
@@ -159,10 +159,10 @@ qr.modules[y][x] // true = dark module; draw it on a canvas, PDF, etc.
 ### Command line
 
 ```bash
-npx pix-brcode create static --key fulano@example.com --name "Fulano de Tal" --city Brasilia --amount 10.50 --qr
-npx pix-brcode parse "<copia e cola>"
-npx pix-brcode qr "<copia e cola>" --svg > pix.svg
-npx pix-brcode key "(61) 91234-5678"
+npx @lorenzo-rafasky/pix-brcode create static --key fulano@example.com --name "Fulano de Tal" --city Brasilia --amount 10.50 --qr
+npx @lorenzo-rafasky/pix-brcode parse "<copia e cola>"
+npx @lorenzo-rafasky/pix-brcode qr "<copia e cola>" --svg > pix.svg
+npx @lorenzo-rafasky/pix-brcode key "(61) 91234-5678"
 ```
 
 ## Errors
