@@ -1,0 +1,71 @@
+{
+  "name": "pix-brcode",
+  "version": "0.1.0",
+  "description": "Generate and parse Pix BR Codes (\"Pix copia e cola\"), validate Pix keys and render QR codes. Zero dependencies, fully typed.",
+  "keywords": [
+    "pix",
+    "brcode",
+    "br-code",
+    "copia-e-cola",
+    "qrcode",
+    "qr-code",
+    "emv",
+    "emvco",
+    "crc16",
+    "pix-automatico",
+    "cpf",
+    "cnpj",
+    "pagamentos",
+    "payments",
+    "brazil",
+    "bcb"
+  ],
+  "license": "MIT",
+  "author": "lorenzorafasky-cloud (https://github.com/lorenzorafasky-cloud)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorenzorafasky-cloud/pix-brcode.git"
+  },
+  "homepage": "https://github.com/lorenzorafasky-cloud/pix-brcode#readme",
+  "bugs": {
+    "url": "https://github.com/lorenzorafasky-cloud/pix-brcode/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "pix-brcode": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.en.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "^5.1.0",
+    "jsqr": "^1.4.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
